@@ -18,11 +18,15 @@ def test_normal_data():
     assert main.calc_grades(189, grade_boundaries) == 'B'
 
 
+def test_above_max():
+    with pytest.raises(ValueError):
+        main.calc_grades(351, grade_boundaries)
+
+
 def test_min_score():
     assert main.calc_grades(0, grade_boundaries) == 'U'
 
 
-# TODO: Sort the fact that a score of 350 is currently assigned 'max' rather than A*
 
 def test_max_score():
     assert main.calc_grades(350, grade_boundaries) == 'A*'
@@ -33,8 +37,7 @@ def test_negative_fail():
         main.calc_grades(-1, grade_boundaries)
 
 
-# TODO: Remember how to hide the type error below
 
 def test_wrong_type():
     with pytest.raises(TypeError):
-        main.calc_grades('Apple', grade_boundaries)
+        main.calc_grades('Apple', grade_boundaries)  # type: ignore
